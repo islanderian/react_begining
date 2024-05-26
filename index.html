@@ -21,31 +21,23 @@
     <script type="text/babel">
       const root = document.querySelector("#root");
 
-      // Component 앞글자는 대문자로 작성해야함!!
-      const Title = () => (
-        <h3 id="title" onMouseEner={() => console.log("mouse enter")}>
-          Hello, i'm title
-        </h3>
-      );
-      // Component 는 함수 형식으로 만들어 주어야 함
-      const Button = () => (
-        <button
-          style={{ backgroundColor: "tomato" }}
-          onClick={() => console.log("click")}
-        >
-          Click me
-        </button>
-      );
+      let counter = 0;
+      function countUp() {
+        counter = counter + 1;
+        render(); // 화면 다시 렌더링
+      }
+      function render() {
+        ReactDOM.render(<Container />, root);
+      }
 
-      // JSX 방식으로 변경
       const Container = () => (
         <div>
-          <Title />
-          <Button />
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={countUp}>Click me</button>
         </div>
       );
 
-      ReactDOM.render(<Container />, root);
+      render(); // 처음 화면 렌더링
     </script>
   </body>
 </html>
