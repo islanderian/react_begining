@@ -21,12 +21,14 @@
     <script type="text/babel">
       const root = document.querySelector("#root");
 
-      const Title = (
+      // Component 앞글자는 대문자로 작성해야함!!
+      const Title = () => (
         <h3 id="title" onMouseEner={() => console.log("mouse enter")}>
           Hello, i'm title
         </h3>
       );
-      const Button = (
+      // Component 는 함수 형식으로 만들어 주어야 함
+      const Button = () => (
         <button
           style={{ backgroundColor: "tomato" }}
           onClick={() => console.log("click")}
@@ -35,9 +37,15 @@
         </button>
       );
 
-      const container = React.createElement("div", null, [Title, Button]);
+      // JSX 방식으로 변경
+      const Container = () => (
+        <div>
+          <Title />
+          <Button />
+        </div>
+      );
 
-      ReactDOM.render(container, root);
+      ReactDOM.render(<Container />, root);
     </script>
   </body>
 </html>
