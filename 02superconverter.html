@@ -21,11 +21,17 @@
     <script type="text/babel">
       const root = document.querySelector("#root");
       const App = () => {
-        const [minutes, setMinutes] = React.useState();
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+
         const onChange = (event) => {
-          setMinutes(event.target.value);
+          setAmount(event.target.value);
         };
-        const reset = () => setMinutes(0);
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+          reset();
+          setFlipped((current) => !current); //flipped 토글
+        };
 
         return (
           <div>
@@ -36,8 +42,9 @@
                 id="minutes"
                 type="number"
                 placeholder="Minutes"
-                value={minutes}
+                value={flipped ? amount * 60 : amount}
                 onChange={onChange}
+                disabled={flipped}
               />
             </div>
             <div>
@@ -46,11 +53,13 @@
                 id="hours"
                 type="number"
                 placeholder="Hours"
-                value={Math.round(minutes / 60)}
-                disabled
+                value={flipped ? amount : Math.round(amount / 60)}
+                onChange={onChange}
+                disabled={!flipped}
               />
             </div>
             <button onClick={reset}>Reset</button>
+            <button onClick={onFlip}>Flip</button>
           </div>
         );
       };
