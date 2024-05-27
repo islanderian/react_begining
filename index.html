@@ -20,24 +20,19 @@
     <!-- babel 형식으로 작성 -->
     <script type="text/babel">
       const root = document.querySelector("#root");
+      const App = () => {
+        // useState
+        // 바꿀 데이터, 데이터를 바꿀 함수. 이 2가지가 배열로 리턴됨
+        const [counter, modifier] = React.useState();
+        return (
+          <div>
+            <h3>Total clicks: 0</h3>
+            <button>Click me</button>
+          </div>
+        );
+      };
 
-      let counter = 0;
-      function countUp() {
-        counter = counter + 1;
-        render(); // 화면 다시 렌더링
-      }
-      function render() {
-        ReactDOM.render(<Container />, root);
-      }
-
-      const Container = () => (
-        <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={countUp}>Click me</button>
-        </div>
-      );
-
-      render(); // 처음 화면 렌더링
+      ReactDOM.render(<App />, root);
     </script>
   </body>
 </html>
