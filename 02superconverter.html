@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Converter</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <!-- Babel CDN -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- babel 형식으로 작성 -->
+    <script type="text/babel">
+      const root = document.querySelector("#root");
+      const App = () => {
+        const [minutes, setMinutes] = React.useState();
+        const onChange = (event) => {
+          setMinutes(event.target.value);
+        };
+
+        return (
+          <div>
+            <h1 className="hi">Super Converter</h1>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              id="minutes"
+              type="number"
+              placeholder="Minutes"
+              value={minutes}
+              onChange={onChange}
+            />
+            <h4>You wnt to convert {minutes}</h4>
+            <label htmlFor="hours">Hours</label>
+            <input id="hours" type="number" placeholder="Hours" />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
