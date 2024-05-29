@@ -64,7 +64,51 @@
         );
       };
       const KmToMiles = () => {
-        return <h3>Km to Miles</h3>;
+        const [amount, setAmount] = React.useState(0);
+        const [isMile, setIsMile] = React.useState(false);
+
+        const onChange = (e) => {
+          setAmount(e.target.value);
+          // console.log(e.target.value);
+        };
+
+        const invertBtn = () => {
+          setIsMile(!isMile);
+          onReset();
+        };
+
+        const onReset = () => {
+          setAmount(0);
+        };
+
+        return (
+          <div>
+            <div>
+              <label htmlFor="km">Km : </label>
+              <input
+                id="km"
+                type="number"
+                min="0"
+                onChange={onChange}
+                value={isMile ? amount / 0.621371 : amount}
+                disabled={isMile}
+              />
+            </div>
+            <div>
+              <label htmlFor="mile">Mile : </label>
+              <input
+                in="mile"
+                type="number"
+                min="0"
+                onChange={onChange}
+                value={isMile ? amount : amount * 0.621371}
+                disabled={!isMile}
+              />
+            </div>
+            <button onClick={onReset}>Reset</button>
+            <button onClick={invertBtn}>Invert</button>
+          </div>
+        );
       };
 
       const App = () => {
