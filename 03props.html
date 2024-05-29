@@ -19,7 +19,9 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      function Btn({ text, big }) {
+      function Btn({ text, changeValue }) {
+        console.log(text, "was rendered");
+
         return (
           <button
             style={{
@@ -28,19 +30,28 @@
               padding: "10px 20px",
               border: 0,
               borderRadius: 10,
-              fontSize: big ? 18 : 16,
             }}
+            onClick={changeValue}
           >
             {text}
           </button>
         );
       }
 
+      // React memo 기능 사용 (useState에 의해 바뀌는 component만 리렌더링)
+      const MemorizedBtn = React.memo(Btn);
+
       const App = () => {
+        const [value, setValue] = React.useState("Save Changes");
+
+        const changeValue = () => {
+          setValue("Revert Changes");
+        };
+
         return (
           <div>
-            <Btn text="Save Changes" big={true} />
-            <Btn text="Continue" big={false} />
+            <MemorizedBtn text={value} changeValue={changeValue} />
+            <MemorizedBtn text="Continue" />
           </div>
         );
       };
