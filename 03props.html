@@ -6,12 +6,15 @@
     <title>Super Converter</title>
     <script
       crossorigin
-      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      src="https://unpkg.com/react@18/umd/react.development.js"
     ></script>
     <script
       crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
+
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
     <!-- Babel CDN -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
@@ -19,9 +22,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      function Btn({ text, changeValue }) {
-        console.log(text, "was rendered");
-
+      function Btn({ text, fontSize }) {
         return (
           <button
             style={{
@@ -30,16 +31,18 @@
               padding: "10px 20px",
               border: 0,
               borderRadius: 10,
+              fontSize,
             }}
-            onClick={changeValue}
           >
             {text}
           </button>
         );
       }
 
-      // React memo 기능 사용 (useState에 의해 바뀌는 component만 리렌더링)
-      const MemorizedBtn = React.memo(Btn);
+      Btn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+      };
 
       const App = () => {
         const [value, setValue] = React.useState("Save Changes");
@@ -50,8 +53,8 @@
 
         return (
           <div>
-            <MemorizedBtn text={value} changeValue={changeValue} />
-            <MemorizedBtn text="Continue" />
+            <Btn text="SaveChange" fontSize={18} />
+            <Btn text="Continue" />
           </div>
         );
       };
